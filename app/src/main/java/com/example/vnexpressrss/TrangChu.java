@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,10 +33,12 @@ public class TrangChu extends AppCompatActivity {
     ListView listView;
     ArticleAdapter articleAdapter;
     ArrayList<Article> articleArrayList;
-
+    View footerView;
     public void init(){
         listView = findViewById(R.id.list_article);
         articleArrayList = new ArrayList<Article>();
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        footerView = inflater.inflate(R.layout.footer_view,null);
     }
 
     @Override
@@ -66,6 +70,18 @@ public class TrangChu extends AppCompatActivity {
                 Intent intent = new Intent(TrangChu.this, ArticleView.class);
                 intent.putExtra("link", articleArrayList.get(position).link);
                 startActivity(intent);
+            }
+        });
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
             }
         });
 
